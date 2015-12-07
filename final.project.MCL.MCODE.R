@@ -74,6 +74,9 @@ visualization(graph = g,
                 node.fill.color = color)
               # node.fill.color = list(heat.colors(5)))
 title(main = "Molecular Complex Detection Algorithm (MCODE), VWP = 0.2", cex.main = 4)
+legend("bottomright", legend = c('color[membership == 1] <- "red"', 'color[membership == 2] <- "pink"',
+                                 'color[membership == 4] <- "aquamarine"', 'color[membership == 5] <- "yellow"',
+                                 'color[membership == 9] <- "magenta"'), pch = 1, title = "Cluster Size")
 dev.off()
 
 #======================= MCL generation and visualisation ==================================
@@ -130,6 +133,9 @@ visualization(graph = g2,
                 edge.width=0.1,
                 node.fill.color = color2)
 title(main = "Markov Clustering (MCL), Top 5 largest clusters", cex.main = 4)
+legend("bottomright", legend = c('color[membership == 3] <- "red"', 'color[membership == 1] <- "pink"',
+                                 'color[membership == 5] <- "aquamarine"', 'color[membership == 6] <- "yellow"',
+                                 'color[membership == 7] <- "magenta"'), pch = 1, title = "Cluster Size")
 dev.off()
 
 # generateMCL function, used To find the induced subgraph 
