@@ -1,0 +1,180 @@
+Gene_name_1	Adscription_1	Interaction_type	Gene_name_2	Adscription_2
+M1	IAV protein	pp	GNB2L1	DHP of IAV
+M1	IAV protein	pp	VPS28	DHP of IAV
+M1	IAV protein	pp	CDC42	DHP of IAV
+M1	IAV protein	pp	C1QA	DHP of IAV
+M1	IAV protein	pp	PRKRA	DHP of IAV
+M1	IAV protein	pp	SDCBP2	DHP of IAV
+M1	IAV protein	pp	STAU1	DHP of IAV
+M1	IAV protein	pp	TFCP2	DHP of IAV
+M1	IAV protein	pp	LNX2	DHP of IAV
+M1	IAV protein	pp	MEOX2	DHP of IAV
+M1	IAV protein	pp	EXOSC8	DHP of IAV
+M1	IAV protein	pp	DVL3	DHP of IAV
+M1	IAV protein	pp	DVL2	DHP of IAV
+M1	IAV protein	pp	HSPA8	DHP of IAV
+NS2	IAV protein	pp	AIMP2	DHP of IAV
+NS2	IAV protein	pp	DYNLL2	DHP of IAV
+NS1	IAV protein	pp	BANP	DHP of IAV
+NS1	IAV protein	pp	CRK	DHP of IAV
+NS1	IAV protein	pp	CRKL	DHP of IAV
+NS1	IAV protein	pp	DDX58	DHP of IAV
+NS1	IAV protein	pp	PIK3R2	DHP of IAV
+NS1	IAV protein	pp	STAU1	DHP of IAV
+NS1	IAV protein	pp	NXT1	DHP of IAV
+NS1	IAV protein	pp	NXF1	DHP of IAV
+NS1	IAV protein	pp	RAE1	DHP of IAV
+NS1	IAV protein	pp	TARBP2	DHP of IAV
+NS1	IAV protein	pp	EIF2AK2	DHP of IAV
+NS1	IAV protein	pp	UBE2I	DHP of IAV
+NS1	IAV protein	pp	ZNF346	DHP of IAV
+NS1	IAV protein	pp	TRIM25	DHP of IAV
+NS1	IAV protein	pp	KPNA1	DHP of IAV
+NS1	IAV protein	pp	KPNA4	DHP of IAV
+NS1	IAV protein	pp	KPNA2	DHP of IAV
+NS1	IAV protein	pp	KPNA6	DHP of IAV
+NS1	IAV protein	pp	KPNA5	DHP of IAV
+NS1	IAV protein	pp	PRKRA	DHP of IAV
+NS1	IAV protein	pp	SEPT1	DHP of IAV
+NS1	IAV protein	pp	SP100	DHP of IAV
+NS1	IAV protein	pp	STX5	DHP of IAV
+NS1	IAV protein	pp	LNX2	DHP of IAV
+NS1	IAV protein	pp	LYPLA1	DHP of IAV
+NS1	IAV protein	pp	MAPK9	DHP of IAV
+NS1	IAV protein	pp	MTAP	DHP of IAV
+NS1	IAV protein	pp	FXR2	DHP of IAV
+NS1	IAV protein	pp	KPNA3	DHP of IAV
+NS1	IAV protein	pp	KHDRBS3	DHP of IAV
+NS1	IAV protein	pp	PIK3R1	DHP of IAV
+PB1	IAV protein	pp	BANP	DHP of IAV
+PB1	IAV protein	pp	PA2G4	DHP of IAV
+PB1	IAV protein	pp	CEP70	DHP of IAV
+PB1	IAV protein	pp	HSP90AA1	DHP of IAV
+PB1	IAV protein	pp	TRIP6	DHP of IAV
+PB1	IAV protein	pp	UBE2I	DHP of IAV
+PB1	IAV protein	pp	USHBP1	DHP of IAV
+PB1	IAV protein	pp	ZNF346	DHP of IAV
+PB1	IAV protein	pp	NRF1	DHP of IAV
+PB1	IAV protein	pp	PLAC8	DHP of IAV
+PB1	IAV protein	pp	RBPMS	DHP of IAV
+PB1	IAV protein	pp	SIAH1	DHP of IAV
+PB1	IAV protein	pp	TFCP2	DHP of IAV
+PB1	IAV protein	pp	TCF12	DHP of IAV
+PB1	IAV protein	pp	LNX2	DHP of IAV
+PB1	IAV protein	pp	MAGEA11	DHP of IAV
+PB1	IAV protein	pp	MEOX2	DHP of IAV
+PB1	IAV protein	pp	DVL2	DHP of IAV
+PB1	IAV protein	pp	DVL3	DHP of IAV
+PB1	IAV protein	pp	FXR2	DHP of IAV
+PB1	IAV protein	pp	IKZF3	DHP of IAV
+PB1	IAV protein	pp	IPO5	DHP of IAV
+PB2	IAV protein	pp	BANP	DHP of IAV
+PB2	IAV protein	pp	CCDC33	DHP of IAV
+PB2	IAV protein	pp	CEP70	DHP of IAV
+PB2	IAV protein	pp	BLZF1	DHP of IAV
+PB2	IAV protein	pp	CALCOCO1	DHP of IAV
+PB2	IAV protein	pp	HSP90AA1	DHP of IAV
+PB2	IAV protein	pp	HSP90AB1	DHP of IAV
+PB2	IAV protein	pp	TRAF1	DHP of IAV
+PB2	IAV protein	pp	TRAF2	DHP of IAV
+PB2	IAV protein	pp	USHBP1	DHP of IAV
+PB2	IAV protein	pp	PNMA1	DHP of IAV
+PB2	IAV protein	pp	RABGEF1	DHP of IAV
+PB2	IAV protein	pp	RBPMS	DHP of IAV
+PB2	IAV protein	pp	TCF12	DHP of IAV
+PB2	IAV protein	pp	TACC1	DHP of IAV
+PB2	IAV protein	pp	TFCP2	DHP of IAV
+PB2	IAV protein	pp	LNX2	DHP of IAV
+PB2	IAV protein	pp	MAGEA11	DHP of IAV
+PB2	IAV protein	pp	MAPK9	DHP of IAV
+PB2	IAV protein	pp	MEOX2	DHP of IAV
+PB2	IAV protein	pp	CRYAB	DHP of IAV
+PB2	IAV protein	pp	DOCK8	DHP of IAV
+PB2	IAV protein	pp	CREB3	DHP of IAV
+PB2	IAV protein	pp	DVL3	DHP of IAV
+PB2	IAV protein	pp	DVL2	DHP of IAV
+PB2	IAV protein	pp	HOOK1	DHP of IAV
+PB2	IAV protein	pp	FXR2	DHP of IAV
+PB2	IAV protein	pp	KCNRG	DHP of IAV
+HA	IAV protein	pp	LNX2	DHP of IAV
+HA	IAV protein	pp	COL4A3BP	DHP of IAV
+HA	IAV protein	pp	CREB3	DHP of IAV
+M2	IAV protein	pp	CBS	DHP of IAV
+M2	IAV protein	pp	TFCP2	DHP of IAV
+M2	IAV protein	pp	ZBTB25	DHP of IAV
+M2	IAV protein	pp	RBPMS	DHP of IAV
+M2	IAV protein	pp	SETBP1	DHP of IAV
+M2	IAV protein	pp	LNX2	DHP of IAV
+M2	IAV protein	pp	MEOX2	DHP of IAV
+M2	IAV protein	pp	DVL2	DHP of IAV
+M2	IAV protein	pp	DVL3	DHP of IAV
+PA	IAV protein	pp	ABLIM1	DHP of IAV
+PA	IAV protein	pp	BCAP29	DHP of IAV
+PA	IAV protein	pp	MCM7	DHP of IAV
+PA	IAV protein	pp	MCM5	DHP of IAV
+PA	IAV protein	pp	MCM2	DHP of IAV
+PA	IAV protein	pp	CDC42EP4	DHP of IAV
+PA	IAV protein	pp	CHMP6	DHP of IAV
+PA	IAV protein	pp	MCM3	DHP of IAV
+PA	IAV protein	pp	MCM4	DHP of IAV
+PA	IAV protein	pp	UROS	DHP of IAV
+PA	IAV protein	pp	YIPF6	DHP of IAV
+PA	IAV protein	pp	POLR2A	DHP of IAV
+PA	IAV protein	pp	PPP2R5C	DHP of IAV
+PA	IAV protein	pp	QTRT1	DHP of IAV
+PA	IAV protein	pp	DNM2	DHP of IAV
+PA	IAV protein	pp	SECISBP2	DHP of IAV
+PA	IAV protein	pp	RNF5	DHP of IAV
+PA	IAV protein	pp	SSBP2	DHP of IAV
+PA	IAV protein	pp	LNX2	DHP of IAV
+PA	IAV protein	pp	MEOX2	DHP of IAV
+PA	IAV protein	pp	GLYAT	DHP of IAV
+PA	IAV protein	pp	KPNA3	DHP of IAV
+NP	IAV protein	pp	KPNA4	DHP of IAV
+NP	IAV protein	pp	KPNA2	DHP of IAV
+NP	IAV protein	pp	ILF3	DHP of IAV
+NP	IAV protein	pp	ACTB	DHP of IAV
+NP	IAV protein	pp	XPO1	DHP of IAV
+NP	IAV protein	pp	CEP70	DHP of IAV
+NP	IAV protein	pp	BAT1	DHP of IAV
+NP	IAV protein	pp	ATP6V1G2	DHP of IAV
+NP	IAV protein	pp	KPNA1	DHP of IAV
+NP	IAV protein	pp	TRAF1	DHP of IAV
+NP	IAV protein	pp	DDB1	DHP of IAV
+NP	IAV protein	pp	NPM1	DHP of IAV
+NP	IAV protein	pp	MAGEA11	DHP of IAV
+NP	IAV protein	pp	MAGED1	DHP of IAV
+NP	IAV protein	pp	MLH1	DHP of IAV
+NP	IAV protein	pp	GMCL1	DHP of IAV
+NP	IAV protein	pp	FXR2	DHP of IAV
+NP	IAV protein	pp	KPNA6	DHP of IAV
+NP	IAV protein	pp	KPNA3	DHP of IAV
+NA	IAV protein	pp	MEOX2	DHP of IAV
+NA	IAV protein	pp	CREB3	DHP of IAV
+M1	IAV protein	pp	NS1	IAV protein
+M1	IAV protein	pp	PB1	IAV protein
+M1	IAV protein	pp	PA	IAV protein
+M1	IAV protein	pp	NP	IAV protein
+M1	IAV protein	pp	NA	IAV protein
+M1	IAV protein	pp	NS2	IAV protein
+NS2	IAV protein	pp	PA	IAV protein
+NS2	IAV protein	pp	PB2	IAV protein
+NS2	IAV protein	pp	NS1	IAV protein
+NS2	IAV protein	pp	PB1	IAV protein
+NS1	IAV protein	pp	PB1	IAV protein
+NS1	IAV protein	pp	PA	IAV protein
+NS1	IAV protein	pp	PB2	IAV protein
+PB1	IAV protein	pp	PA	IAV protein
+PB1	IAV protein	pp	PB2	IAV protein
+HA	IAV protein	pp	NP	IAV protein
+HA	IAV protein	pp	NS1	IAV protein
+HA	IAV protein	pp	PA	IAV protein
+HA	IAV protein	pp	PB1	IAV protein
+PA	IAV protein	pp	PB2	IAV protein
+NP	IAV protein	pp	PB1	IAV protein
+NP	IAV protein	pp	PB2	IAV protein
+NP	IAV protein	pp	NS1	IAV protein
+NP	IAV protein	pp	PA	IAV protein
+NA	IAV protein	pp	PA	IAV protein
+NA	IAV protein	pp	PB1	IAV protein
+NA	IAV protein	pp	NS1	IAV protein

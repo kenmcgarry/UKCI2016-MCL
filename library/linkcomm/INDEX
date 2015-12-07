@@ -1,0 +1,52 @@
+LinkDensities           Calculate Link Community Link Densities
+corLinkcommCentrality   Correlation of Community Centrality with
+                        Classic Centrality
+cutDendrogramAt         Extract Meta-Communities
+edge.duplicates         Find and Remove Edge Loops and Duplicates
+get.community.overlaps
+                        Find Node Overlaps between Communities
+get.shared.nodes        Get Nodes Shared by Communities
+getAllNestedComm        Find Nested Communities
+getClusterRelatedness   Hierarchichal Clustering of Link Communities
+getCommunityCentrality
+                        Calculate Community Centrality Measures for
+                        Nodes
+getCommunityConnectedness
+                        Calculate Community Connectedness or Modularity
+getCommunityMatrix      Construct a Community Membership Matrix
+getEdgesIn              Extract Edge Indices from Communities
+getLinkCommunities      Extract Link Communities from a Network
+getNestedHierarchies    Find Nested Structures in Communities
+getNodesIn              Extract Nodes from Communities
+getOCG.clusters         Generate Overlapping Cluster Generator (OCG)
+                        Communities
+graph.feature           Make Node or Edge Graph Features
+human_pp                Sample Human Protein Interactome
+integer.edgelist        Convert A Network to an Integer Edgelist
+karate                  Social Network in a Karate Club
+layout.spencer.circle   Calculate Node Coordinates for a Spencer Circle
+lesmiserables           Co-Appearance Network from Les Miserables
+linkcomm-package        The 'linkcomm' package
+linkcomm2clustnsee      Write a Partition File for Clust&See
+linkcomm2cytoscape      Write an Edge Attribute File for Cytoscape
+meta.communities        Produce a Set of Meta-Communities
+newLinkCommsAt          User-Defined Link Communities
+numberEdgesIn           Extract Node Community Membership by Edges
+orderCommunities        Order Link Communities According to the
+                        Dendrogram
+plot.OCG                The 'OCG' Plotting Function
+plot.linkcomm           The 'linkcomm' Plotting Function
+plotLinkCommDend        Plot a Coloured Dendrogram of Link Communities
+plotLinkCommGraph       Plot a Graph Layout of Link Communities
+plotLinkCommMembers     Plot a Community Membership Matrix for Link
+                        Communities
+plotLinkCommSumm        Plot a Summary of the Link Community Algorithm
+                        Output
+plotLinkCommSummComm    Plot a Summary of the Link Communities
+plotOCGraph             Plot a Graph Layout of OCG Communities
+pp_rnapol               Sample Yeast Protein Interactome
+print.OCG               Print a Summary of an 'OCG' Object
+print.linkcomm          Print a Summary of a 'linkcomm' Object
+read.OCG                Read an OCG Partition File into R
+weighted                Sample Gene Co-Expression Network
+which.communities       Extract Community Membership for Nodes

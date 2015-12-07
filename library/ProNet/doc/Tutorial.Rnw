@@ -1,0 +1,357 @@
+%\VignetteIndexEntry{ProNet Tutorial}
+\documentclass[a4paper,oneside,10pt]{article}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{calc}
+\usepackage{sectsty}
+\usepackage{caption}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+
+\renewcommand{\captionfont}{\it\sffamily}
+\renewcommand{\captionlabelfont}{\bf\sffamily}
+\allsectionsfont{\sffamily}
+
+\usepackage[a4paper,left=25mm,right=20mm,top=20mm,bottom=25mm,nohead]{geometry}
+\setlength{\parskip}{1.5ex}
+\setlength{\parindent}{0cm}
+\pagestyle{plain}
+
+\usepackage{Sweave}
+
+\title{\textbf{ProNet} Tutorial}
+
+\author{Xiang-Yun Wu and Xia-Yu Xia \\
+        xiaxiayu.thu@hotmail.com}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+<<options,echo=FALSE>>=
+options(width=100)
+@
+%\date{\today}
+
+\begin{abstract}
+
+Increasing quantity and quality of omics data creates the strong demand on integrative approaches to analyze large datasets, and network-based representations has become popularly. The {\tt ProNet} package integrates several functional modules and provides a simple way for network construction, visualization, topological analyses and comparison, clustering, as well as biological functions statistics. This tutorial illustrates how to use this {\tt ProNet} package based on the dataset from the work of \emph{Lai et al.} \citep{navratiletal2009, laietal2012}.  
+
+\end{abstract}
+
+\tableofcontents
+
+\clearpage
+
+\section{Quick start}
+
+To install {\tt ProNet} run the following command within R:
+
+<<eval = FALSE>>=
+install.packages("ProNet")
+@
+
+To load {\tt ProNet} into your current R session:
+
+<<eval = TRUE>>=
+library("ProNet")
+@
+
+A network can then be constructed either from experimental PPI data or a set of gene products and the integrated PPI database.
+
+<<>>=
+nodes<-data.frame(c("1855","1856","1857"))
+network<-construction(input=nodes,db="Biogrid",species="human",ID.type="Entrez Gene",hierarchy=1)
+@
+
+Next, operation on the network including sub-network extraction and assembling can be done.
+
+<<>>=
+net1<-extraction(network, mode="sample", sample.number=20)
+net2<-extraction(network, mode="exact", nodes=1:20)
+net3<-assemble(net1, net2, mode="union")
+@
+
+Plot of the networks can be achieved by the visulization module.
+
+<<>>=
+visualization(network, layout="fruchterman.reingold",node.size=8,node.fill.color="red",node.border.color="red",node.label.color="yellow")
+@
+
+We then take topological analyses or comparison on the networks.
+
+<<eval = FALSE>>=
+topology(network, simple.parameters=TRUE, degree.distribution=TRUE,clustering.coefficient=TRUE)
+net.comparing(net1,net2,topology.parameters=TRUE)
+@
+
+Functional modules can be achieved by clustering.
+<<eval = FALSE>>=
+cluster(network, method="MCODE", plot=TRUE, layout="fruchterman.reingold")
+@
+
+GO annotation and comparison can be performed on networks.
+<<eval = FALSE>>=
+enrichment.annotation(network, onto="MF", pvalue=0.05)
+go.profiles(V(net1)$name, V(net2)$name, onto="MF", mode="frequency", plot=TRUE)
+@
+
+\clearpage
+
+\section{Example Session}
+
+To illustrate the package we will construct the network based on the dataset obtained from Lai et al.'s work \citep{laietal2012}. The original H1N1 IAV-human PPI data was revised, and finally contained direct interaction both between the 10 IVA proteins and between them and another 104 human proteins through an overall 179 PPI. This local network was constructed, and then expanded to include those proteins that interact with IAV proteins through at least two direct partners of IAV. Visualization, topological analyses, and graph based clustering, GO analyses were then performed.
+
+\subsection{Network construction and operation}
+
+When constructing a network, the input data must be a data frame. 
+
+<<Read the IAV-human PPI data, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+library("ProNet")
+iavPath <-file.path(system.file("example",package="ProNet"),"iav.txt")
+iav <- read.table(iavPath, header=TRUE, sep="\t")
+head(iav)
+@
+
+At first, the local network of the 179 PPIs between 114 IVA or host proteins was constructed. 
+<<Construct the IVA-human local network, warning=FALSE, tidy=TRUE, prompt=TRUE>>=
+g1 <- construction(iav[,c("Gene_name_1","Gene_name_2")],local.net=TRUE)
+sp <- unique(cbind(c(as.vector(iav[,"Gene_name_1"]),as.vector(iav[,"Gene_name_2"])),
+                   c(as.vector(iav[,"Adscription_1"]),as.vector(iav[,"Adscription_2"]))))
+V(g1)$species <- sp[,2]
+summary(g1)
+@
+
+Second, the non-local network between host proteins that interact with nodes having at least IAV protein partners was constructed based on the integrated Biogrid database.
+
+<<Read the IAV-human PPI data, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+hostPath <-file.path(system.file("example",package="ProNet"),"host.txt")
+host <- read.table(hostPath, header=TRUE, sep="\t")
+g2 <- construction(input=as.data.frame(unique(host[,"Protein.name"])),
+                   hierarchy=1,db="HPRD",species="human",ID.type="Gene symbol")
+summary(g2)
+@
+
+The expanded IAV-host network was then abtained by integrating these two networks.
+
+<<Read the IAV-human PPI data, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+hprd <- construction(db="HPRD",ID.type= c("Gene symbol"))
+id <- match(unique(c(V(g1)$name,V(g2)$name)),V(hprd)$name)
+gtemp <- induced.subgraph(hprd, id[!is.na(id)])
+g3 <- assemble(g1,gtemp,mode="union")
+summary(g3)
+@
+
+\subsection{Visulization of the network}
+
+The network can be viewed either by simple visualization:
+<<Simple visualization, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+color <- rep(1,vcount(g3))
+color[V(g3)$species=="DHP of IAV"] <- "red"
+color[V(g3)$species=="IAV protein"] <- "black"
+color[is.na(V(g3)$species)] <- "green"
+visualization(g3,node.size=3,node.fill.color=color,node.label="",edge.color="gray")
+legend("topleft",col=c("black","red","green"),
+       legend=c("virus","human_direct","human_indirect"),pch=19)
+@
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=5.0in]{Simple.png}}
+\caption{Simple visualization of the constructed g3 network.}\label{graphs}
+\end{figure}
+
+
+Or subcellular localization based visualization:
+<<Subcellular location based visualization, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+V(g3)$expression<-rexp(vcount(g3),1)
+location(g3,species=c("human"),vertex.size=3,vertex.label.cex=0.5,
+         vertex.color="expression",xlim=c(-1,1),ylim=c(-1,1))
+@
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=5.0in]{Location.png}}
+\caption{Subcellular localization based visualization of the constructed g3 network.}\label{graphs}
+\end{figure}
+
+\subsection{Topological analyses}
+
+Overall statistics of the network's topology parameters can be retrieved by:
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+topology(g3,simple.parameters=TRUE)
+@
+
+Specific statistics of the degree distribution.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+tp <- topology(g2,degree.distribution=TRUE)
+head(as.data.frame(tp))
+@
+
+Other topological parameters like clustering coefficient, betweeness, shortest path, eigenvector centrality, connectivity and closeness can be obtained similarly by changing the default setting of the parameters to be TRUE. 
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+tp <- topology(g2,shortest.paths=TRUE)
+head(as.data.frame(tp))
+@
+
+Along with the returned list of statistics value, a plot is also provided.
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=4.0in]{Length.png}}
+\caption{Shortest path length distribution of the g2 network.}\label{graphs}
+\end{figure}
+
+\subsection{Topological comparison of networks}
+
+It was also able to compare two networks' topological networks by either overall or topological parameter specific statistics.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+net.comparing(g3,hprd,topology.parameters=TRUE)
+@
+
+Mann-Whitney U-test was performed on the degree distribution of the two networks, the p-value and a plot was returned.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+net.comparing(g3,hprd,topology.parameters=FALSE,degree=TRUE)
+@
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=4.0in]{Degree.png}}
+\caption{Degree distribution comparison between the g3 and HPRD networks.}\label{graphs}
+\end{figure}
+
+The same procedure can be performed by setting the other topological parameters as TRUE.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+net.comparing(g3,hprd,topology.parameters=FALSE,degree=TRUE)
+@
+
+To test the significance of the IAV-host interaction network, g3 was compared with randomly selected ones from the whole HPRD network. 
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+comp.rand.subnet(g3,hprd,nsim=10000,ave.path.len=TRUE)
+@
+
+The p-value and a plot of the mean degree distribution of sampled sub-networks would return. Similar results can also be obtained from other parameters comparison.
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=4.0in]{Pathlen.png}}
+\caption{Mean average path length distribution comparison between the g3 and randomly sampled HPRD networks.}\label{graphs}
+\end{figure}
+
+\subsection{Network clustering}
+
+Several graph based network clustering algorithms were integrated into the package, such as the FN \citep{aclausetetal2004}, linkcomm \citep{kalinkaetal2011}, MCL \citep{vandongen2000} and MCODE \citep{baderetal2003} methods. 
+
+There are 7 clusters found by the FN method, and the number of nodes in each cluster is also shown.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+result <- cluster(g3, method="FN")
+clusters <- rep(1, vcount(g3))
+for(i in 1:vcount(g3)){clusters[i] <- result[[i]]}
+clusters <- as.factor(clusters)
+table(clusters)
+@
+
+MCODE method can be perfomed using the individual mcode module. 11 clusters were found, with the largest containing 77 elements. Scores of each cluster were also shown.
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+result <- mcode(g3,vwp=0.05,haircut=TRUE,fluff=FALSE,fdt=0.8,loops=FALSE)
+summary(result$COMPLEX)
+result$score
+@
+
+The first cluster with the highest clustering score is shown.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+cluster1<-induced.subgraph(g3,result$COMPLEX[[1]])
+summary(cluster1)
+visualization(cluster1,node.size=4,node.label=V(cluster1)$name,node.label.color="blue")
+@
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=4.0in]{cluster1.png}}
+\caption{The cluster with the highest clustering score.}\label{graphs}
+\end{figure}
+
+\subsection{GO enrichment and profiling for clusters}
+
+At first, the HPRD id table should be read and prepared for the following conversion.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+idPath <-file.path(system.file("example",package="ProNet"),"hprd.id.txt")
+id <- read.table(idPath, header=FALSE, sep="\t")
+colnames(id) <- c("geneSymbol","entrezgene_id")
+head(id)
+@
+
+Node labels of the networks should be converted to Entrez Gene ID and then GO enrichment is performed.
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+index1 <- match(V(cluster1)$name, as.vector(id$geneSymbol), nomatch=0)
+entrez1 <- as.vector(id$entrezgene_id[index1])
+go.mf <- enrichment.annotation(entrez1, onto="MF", pvalue=0.05)
+head(go.mf[,c("GO_ID","GO_term","p.value")])
+@
+
+GO profiling can be performed either on a single network.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+go.profiles(entrez1, onto="MF",main="cluster1")
+@
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=4.0in]{go1.png}}
+\caption{GO profiling for a single cluster.}\label{graphs}
+\end{figure}
+
+Or comparising between two networks.
+
+<<Toplo, warning=FALSE, message=FALSE, prompt=TRUE, tidy=TRUE>>=
+cluster2<-induced.subgraph(g3,result$COMPLEX[[2]])
+index2 <- match(V(cluster2)$name, as.vector(id$geneSymbol), nomatch=0)
+entrez2 <- as.vector(id$entrezgene_id[index2])
+go.profiles(entrez1,entrez2,onto="MF",main=c("cluster1 vs 2"))
+@
+
+%\setkeys{Gin}{width=2\linewidth}
+\begin{figure}[!ht]
+\advance\leftskip -3cm
+\centerline{\includegraphics[width=4.0in]{go1vs2.png}}
+\caption{GO comparing for a single cluster.}\label{graphs}
+\end{figure}
+
+\clearpage
+
+\begin{thebibliography}{}
+
+\bibitem[A Clauset {\it et al}., 2004]{aclausetetal2004} A Clauset, MEJ Newman, C (2004) Moore: Finding community structure in very large networks. \url{http://www.arxiv.org/abs/cond-mat/0408187}.
+
+\bibitem[Bader GD {\it et al}., 2003]{baderetal2003} Bader GD, Hogue CW. (2003) An automated method for finding molecular complexes in large protein interaction networks. {\it BMC Bioinformatics}, {\bf 4(1)}: 2.
+
+\bibitem[Kalinka {\it et al}., 2011]{kalinkaetal2011} Kalinka, A.T. and Tomancak, P. (2011) linkcomm: an R package for the generation, visualization, and analysis of link communities in networks of arbitrary size and type. {\it Bioinformatics}, {\bf 27(14)}: 2011-2012.
+
+\bibitem[Navratil V {\it et al}., 2009]{navratiletal2009} Navratil V, de Chassey B, Meyniel L, Delmotte S, Gautier C, Andre P, et al. (2009) VirHostNet: a knowledge base for the management and the analysis of proteome-wide virus–host interaction networks. {\it Nucleic Acids Res}, {\bf 37}: 661-8.
+
+\bibitem[van Dongen SM, 2000]{vandongen2000} van Dongen, S.M. (2000) Graph Clustering by Flow Simulation. Ph.D. thesis, Universtiy of Utrecht.
+
+\bibitem[Yan-Hua Lai {\it et al}., 2012]{laietal2012} Yan-Hua Lai, Zhan-Chao Li, Li-Li Chen, Zong Dai, Xiao-Yong Zou. (2012) Identification of potential host proteins for influenza A virus based on topological and biological characteristics by proteome-wide network approach. {\it Journal of Proteomics}, {\bf 75(5)}: 2500-2513.
+
+\end{thebibliography}
+
+\end{document}
