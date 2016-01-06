@@ -1,7 +1,13 @@
 # Created by Suthinan Rujirapipat, 7 December 2015
 # As part of master project @ University of Sunderland, Information Technology Management
-
+setwd("E:\\Sunderland\\PROM01 - Final Dissertation\\Development")
 library(igraph, lib=".\\library")
+library(Rcpp, lib=".\\library")
+library(expm, lib=".\\library")
+library(MCL, lib=".\\library")
+library(dynamicTreeCut, lib=".\\library")
+library(RColorBrewer, lib=".\\library")
+library(linkcomm, lib=".\\library")
 library(ProNet, lib=".\\library")
 
 # http://string-db.org/api/psi-mi-tab/interactionsList?identifiers=APP&limit=10000&required_score=900
@@ -27,7 +33,7 @@ setwd(".\\output")
 # fdt	  <- Cluster density cutoff. Default value is 0.8.
 # loops	<-  Boolean value, whether to include self-loops (TRUE) or not (FALSE).
 
-mcg <- mcode(g, loops = TRUE, vwp=0.2, haircut= TRUE, fluff = TRUE, fdt= 0.2)
+mcg <- mcode(g, vwp=0.0, loops = FALSE, haircut= TRUE, fluff = FALSE, fdt= 0.2)
 
 # Create and visualise of induced subgraphs (clusters), just in case
 # 
@@ -53,14 +59,22 @@ for (i in 1:length(index)) {
 # names(membership) <- V(g)$name
 
 # Find top 5 largest clusters; This will ignore community overlapping nodes using first in first out assignment
-sort(table(unlist(membership)), decreasing = TRUE)[1:5]
+sort(table(unlist(membership[membership != 0])), decreasing = TRUE)[1:5]
+
+transitivity(induced.subgraph(g, mcg$COMPLEX[[14]]), isolates = "zero")
+
+names(membership) <- V(g)$name
+# lc$Cluster <- lc$Cluster
+writeClipboard(names(membership)[membership == 1])
+length(lc$name[lc$Cluster == 3])
+
 
 color <- "white" # Initialised
 color[membership == 1] <- "red"
 color[membership == 2] <- "pink"
-color[membership == 4] <- "aquamarine"
-color[membership == 5] <- "yellow"
-color[membership == 9] <- "magenta"
+color[membership == 3] <- "aquamarine"
+color[membership == 4] <- "yellow"
+color[membership == 5] <- "magenta"
 
 
 # Create network graph of the result
@@ -73,7 +87,7 @@ visualization(graph = g,
                 edge.width=0.1,
                 node.fill.color = color)
               # node.fill.color = list(heat.colors(5)))
-title(main = "Molecular Complex Detection Algorithm (MCODE), VWP = 0.2", cex.main = 4)
+title(main = "Molecular Complex Detection Algorithm (MCODE)", cex.main = 4)
 legend("bottomright", legend = c('color[membership == 1] <- "red"', 'color[membership == 2] <- "pink"',
                                  'color[membership == 4] <- "aquamarine"', 'color[membership == 5] <- "yellow"',
                                  'color[membership == 9] <- "magenta"'), pch = 1, title = "Cluster Size")
@@ -113,7 +127,12 @@ lc
 # Find top 5 largest clusters
 sort(table(unlist(lc$Cluster)), decreasing = TRUE)[1:5]
 
+transitivity(induced.subgraph(g2, lc$Cluster == 9), isolates = "zero")
+
+lc$name <- V(g2)$name
 # lc$Cluster <- lc$Cluster
+writeClipboard(lc$name[lc$Cluster == 3])
+length(lc$name[lc$Cluster == 3])
 
 # Assign color according to the top 5
 color2 <- "white" # Initialised
@@ -132,7 +151,7 @@ visualization(graph = g2,
                 edge.color = "gray",
                 edge.width=0.1,
                 node.fill.color = color2)
-title(main = "Markov Clustering (MCL), Top 5 largest clusters", cex.main = 4)
+title(main = "Markov Clustering (MCL)", cex.main = 4)
 legend("bottomright", legend = c('color[membership == 3] <- "red"', 'color[membership == 1] <- "pink"',
                                  'color[membership == 5] <- "aquamarine"', 'color[membership == 6] <- "yellow"',
                                  'color[membership == 7] <- "magenta"'), pch = 1, title = "Cluster Size")
