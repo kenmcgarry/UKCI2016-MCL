@@ -1,4 +1,6 @@
 # uos-master
-As part of master project @ University of Sunderland, Information Technology Management.
+As part of master project @ University of Sunderland, Information Technology Management. The R work described in our conference paper presented at UKCI-2016 in Lancaster, 7th-9th Sept. If you find this code useful please cite our work:
+
+S. Rujirapapipat, K. McGarry and D. Nelson. Bioinformatic analysis using complex networks and clustering proteins involved with Alzheimer's disease. The 16th UK Workshop on Computational Intelligence, UKCI-2016, Lancaster, Uk, 7th-9th Sept, 2016.
 
 The detection of protein complexes is an important research problem in bioinformatics, which may help increase our understanding of the biological functions of proteins inside our body. Moreover, new discoveries obtained from identification of protein complexes may be considered important for therapeutic purposes. Several proteins linked with Alzheimer’s disease were investigated. By observing the connectivity between proteins using computational methods such as graph theory and clustering, we can uncover previously unknown relationships that are useful for potential knowledge discovery. Furthermore, we demonstrate how Markov Clustering (MCL) and the Molecular Complex Detection (MCODE) algorithm identify interesting patterns from the protein-protein interaction data related to Alzheimer’s disease.
