@@ -2,6 +2,8 @@
 * text=auto
 $ cat .gitattributes
 *.R linguist-language=R
+$ cat .gitattributes
+special-vendored-path/* linguist-vendored
 
 # Custom for Visual Studio
 *.cs     diff=R
